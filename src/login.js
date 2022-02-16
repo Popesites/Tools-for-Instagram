@@ -4,7 +4,7 @@ let Bluebird = require('bluebird');
 let inquirer = require('inquirer');
 let _ = require('lodash');
 //let Api = null;
-let MQTT= require('instagram_mqtt');
+const { IgApiClient } = require('instagram-private-api');
 let { GraphQLSubscriptions } = require('instagram_mqtt/dist/realtime/subscriptions/graphql.subscription');
 let { SkywalkerSubscriptions } = require('instagram_mqtt/dist/realtime/subscriptions/skywalker.subscription');
 let ig = null;
@@ -88,12 +88,14 @@ if(!fs.existsSync("accounts/")) {
 
 //if Input proxy == false then we force to not use the proxy
 async function login(args={}) {
-    let {inputLogin=null, inputPassword=null, inputProxy=null, verificationMode=null, silentMode=false, antiBanMode=false, showRealtimeNotifications = false, onlineMode = true} = args;
+    let {inputLogin=null, inputPassword=null, inputProxy=null, verificationMode=null, silentMode=false, antiBanMode=false, showRealtimeNotifications = false, onlineMode = false} = args;
 
     
-    MQTT.IgApiClientRealtime =  MQTT.withRealtime(new Api.IgApiClient());
-    ig = MQTT.IgApiClientRealtime;
-    
+    // MQTT.IgApiClientRealtime =  MQTT.withRealtime(new Api.IgApiClient());
+    // ig = MQTT.IgApiClientRealtime;
+
+    ig = new IgApiClient();
+
     if(inputLogin!=null && inputPassword !=null) {
         process.env.IG_USERNAME = inputLogin;
         process.env.IG_PASSWORD = inputPassword;
@@ -252,7 +254,7 @@ async function tryToLogin(inputLogin, inputPassword, inputProxy, verificationMod
 
         if(!silentMode) {
             console.log("Logged")
-            console.log(loggedInUser);
+            // console.log(loggedInUser);
         } 
 
         

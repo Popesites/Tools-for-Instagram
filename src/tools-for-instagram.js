@@ -4,8 +4,6 @@ function toolsForInstagram() {
     global.sleep = require('./sleep.js');
     global.sleepSync = require('./sleepSync.js');
     global.Api = require('instagram-private-api');
-    if(!global.noLogo)
-        require('./logo.js')();
     global.login =  require('./login.js');
     global.spider = require('./spider.js');
     global.getTelegramGroup = require('./getTelegramGroup.js');
