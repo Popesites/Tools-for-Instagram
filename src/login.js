@@ -12,7 +12,7 @@ let colors = require('colors');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const shortid = require('shortid');
-
+const regenerateSession = require('./regenerateSession');
 
 
 
@@ -289,7 +289,7 @@ async function tryToLogin(inputLogin, inputPassword, inputProxy, verificationMod
             ig.loggedInUser.inputPassword = process.env.IG_PASSWORD;
             ig.loggedInUser.inputProxy = process.env.IG_PROXY;
             ig.loggedInUser.verificationMode = process.env.IG_VERIFICATION;
-            return await regenerateSession(ig, log = false);//"removeCookie";
+            return await regenerateSession(ig, log = true);
         };
         //Inject other parameters for regenerateSession() cases
         ig.loggedInUser.inputLogin = inputLogin;
