@@ -95,6 +95,7 @@ async function login(args={}) {
     // ig = MQTT.IgApiClientRealtime;
 
     ig = new IgApiClient();
+    console.log(ig.state);
 
     if(inputLogin!=null && inputPassword !=null) {
         process.env.IG_USERNAME = inputLogin;
